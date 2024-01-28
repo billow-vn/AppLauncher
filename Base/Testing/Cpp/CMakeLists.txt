@@ -35,7 +35,9 @@ foreach(file IN ITEMS
     ctkAppLauncherSettingsTest.cpp
     )
   set(moc_file moc_${file})
-  if(CTKAppLauncher_QT_VERSION VERSION_GREATER "4")
+  if(CTKAppLauncher_QT_VERSION VERSION_GREATER "5")
+    QT6_GENERATE_MOC(${file} ${moc_file})
+  elseif(CTKAppLauncher_QT_VERSION VERSION_GREATER "4")
     QT5_GENERATE_MOC(${file} ${moc_file})
   else()
     QT4_GENERATE_MOC(${file} ${moc_file})
@@ -51,7 +53,9 @@ set(${KIT}CppTests_TARGET_LIBRARIES
   CTKAppLauncherBase
   CTKAppLauncherTestingHelper
   )
-if(CTKAppLauncher_QT_VERSION VERSION_GREATER "4")
+if(CTKAppLauncher_QT_VERSION VERSION_GREATER "5")
+  list(APPEND ${KIT}CppTests_TARGET_LIBRARIES Qt6::Test)
+elseif(CTKAppLauncher_QT_VERSION VERSION_GREATER "4")
   list(APPEND ${KIT}CppTests_TARGET_LIBRARIES Qt5::Test)
 else()
   list(APPEND ${KIT}CppTests_TARGET_LIBRARIES Qt4::QtTest)
